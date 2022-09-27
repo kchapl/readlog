@@ -31,7 +31,7 @@ instance View IndexView where
 renderBook :: Book -> Html
 renderBook book = [hsx|
     <tr>
-        <td>{book}</td>
+        <td>{book.author} ({book.publicationYear}) <em>{book.title}: {book.subtitle}</em>. {book.publicationPlace}: {book.publisher}.</td>
         <td><a href={ShowBookAction book.id}>Show</a></td>
         <td><a href={EditBookAction book.id} class="text-muted">Edit</a></td>
         <td><a href={DeleteBookAction book.id} class="js-delete text-muted">Delete</a></td>

@@ -1,0 +1,3 @@
+ALTER TABLE books ALTER COLUMN publication_year SET NOT NULL;
+ALTER TABLE books ALTER COLUMN publication_place SET NOT NULL;
+ALTER TABLE books ALTER COLUMN isbn SET NOT NULL;

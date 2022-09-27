@@ -7,8 +7,7 @@ instance View ShowView where
     html ShowView { .. } = [hsx|
         {breadcrumb}
         <h1>Show Book</h1>
-        <p>{book}</p>
-
+        <div>{book.author} ({book.publicationYear}) <em>{book.title}: {book.subtitle}</em>. {book.publicationPlace}: {book.publisher}. {book.isbn}</div>
     |]
         where
             breadcrumb = renderBreadcrumb
