@@ -3,6 +3,7 @@ module Web.Controller.Books where
 import Web.Controller.Prelude
 import Web.View.Books.Index
 import Web.View.Books.New
+import Web.View.Books.NewFromIsbn
 import Web.View.Books.Edit
 import Web.View.Books.Show
 
@@ -14,6 +15,10 @@ instance Controller BooksController where
     action NewBookAction = do
         let book = newRecord
         render NewView { .. }
+
+    action NewBookFromIsbnAction = do
+        let book = newRecord
+        render NewFromIsbnView { .. }
 
     action ShowBookAction { bookId } = do
         book <- fetch bookId

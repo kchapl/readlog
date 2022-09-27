@@ -12,6 +12,7 @@ data StaticController = WelcomeAction deriving (Eq, Show, Data)
 data BooksController
     = BooksAction
     | NewBookAction
+    | NewBookFromIsbnAction
     | ShowBookAction { bookId :: !(Id Book) }
     | CreateBookAction
     | EditBookAction { bookId :: !(Id Book) }
