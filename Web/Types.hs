@@ -15,6 +15,7 @@ data BooksController
     | NewBookFromIsbnAction
     | ShowBookAction { bookId :: !(Id Book) }
     | CreateBookAction
+    | CreateBookFromIsbnAction
     | EditBookAction { bookId :: !(Id Book) }
     | UpdateBookAction { bookId :: !(Id Book) }
     | DeleteBookAction { bookId :: !(Id Book) }

@@ -16,7 +16,7 @@ instance View NewFromIsbnView where
                 ]
 
 renderForm :: Book -> Html
-renderForm book = formFor book [hsx|
+renderForm book = formFor' book (pathTo CreateBookFromIsbnAction) [hsx|
     {(textField #isbn)}
     {submitButton}
 

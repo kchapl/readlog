@@ -16,7 +16,7 @@ instance View IndexView where
                         <th></th>
                         <th></th>
                         <th></th>
-                    </tr>
+                    </tr>   
                 </thead>
                 <tbody>{forEach books renderBook}</tbody>
             </table>

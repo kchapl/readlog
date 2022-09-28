@@ -50,6 +50,17 @@ instance Controller BooksController where
                     setSuccessMessage "Book created"
                     redirectTo BooksAction
 
+    action CreateBookFromIsbnAction = do
+        let isbn = newRecord @Book
+        isbn
+            |> buildBookFromIsbn
+            |> ifValid \case
+                Left book -> render NewView { .. }
+                Right book -> do
+                    book <- book |> createRecord
+                    setSuccessMessage "Book created"
+                    redirectTo BooksAction
+
     action DeleteBookAction { bookId } = do
         book <- fetch bookId
         deleteRecord book
@@ -57,4 +68,6 @@ instance Controller BooksController where
         redirectTo BooksAction
 
 buildBook book = book
-    |> fill @["author", "title"]
+    |> fill @["author", "title", "subtitle", "publicationYear", "publicationPlace", "publisher", "isbn"]
+
+buildBookFromIsbn isbn = isbn
