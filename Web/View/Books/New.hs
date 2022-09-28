@@ -19,6 +19,11 @@ renderForm :: Book -> Html
 renderForm book = formFor book [hsx|
     {(textField #author)}
     {(textField #title)}
+    {(textField #subtitle)}
+    {(textField #publicationYear)}
+    {(textField #publicationPlace)}
+    {(textField #publisher)}
+    {(textField #isbn)}
     {submitButton}
 
 |]
