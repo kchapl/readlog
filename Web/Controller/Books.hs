@@ -7,6 +7,9 @@ import Web.View.Books.NewFromIsbn
 import Web.View.Books.Edit
 import Web.View.Books.Show
 
+import qualified Network.Wreq as Wreq
+import Control.Lens ((^.))
+
 instance Controller BooksController where
     action BooksAction = do
         books <- query @Book |> fetch
@@ -51,15 +54,7 @@ instance Controller BooksController where
                     redirectTo BooksAction
 
     action CreateBookFromIsbnAction = do
-        let isbn = newRecord @Book
-        isbn
-            |> buildBookFromIsbn
-            |> ifValid \case
-                Left book -> render NewView { .. }
-                Right book -> do
-                    book <- book |> createRecord
-                    setSuccessMessage "Book created"
-                    redirectTo BooksAction
+        handleFetchAction "https://www.googleapis.com/books/v1/volumes?q=isbn:9780008241780"
 
     action DeleteBookAction { bookId } = do
         book <- fetch bookId
@@ -71,3 +66,10 @@ buildBook book = book
     |> fill @["author", "title", "subtitle", "publicationYear", "publicationPlace", "publisher", "isbn"]
 
 buildBookFromIsbn isbn = isbn
+
+handleFetchAction :: _ => Text -> _
+handleFetchAction url = do
+    documentBody <- do
+        response <- Wreq.get (cs url)
+        pure (response ^. Wreq.responseBody)
+    renderPlain (cs documentBody)
